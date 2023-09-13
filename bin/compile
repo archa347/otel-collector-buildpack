@@ -1,0 +1,32 @@
+#!/bin/sh
+
+BUILD_DIR=$1
+BUILDPACK_DIR=$(cd "$(dirname "$0")"; cd ..; pwd)
+
+OTEL_COLL_TARBALL_PATH=otel-coll.tar.gz
+HEROKU_OTEL_PATH=$BUILD_DIR/.heroku-otel
+OTEL_COL_TARBALL_URL=https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.85.0/otelcol_0.85.0_linux_amd64.tar.gz
+
+echo "-----> Downloading OTEL Collector contrib tarball"
+wget $OTEL_COL_TARBALL_URL -O $OTEL_COLL_TARBALL_PATH
+echo "extracting collector"
+mkdir -p $HEROKU_OTEL_PATH
+tar -xf $OTEL_COLL_TARBALL_PATH -C $HEROKU_OTEL_PATH
+
+echo "-----> Adding config"
+cp etc/config.yaml $HEROKU_OTEL_PATH/config.yaml
+
+echo "-----> Setting up profile.d script"
+mkdir -p "$BUILD_DIR/.profile.d"
+cp $BUILDPACK_DIR/etc/collector.sh $BUILD_DIR/.profile.d/collector.sh
+chmod +x "$BUILD_DIR/.profile.d/collector.sh"
+
+
+
+
+
+
+
+
+
+
