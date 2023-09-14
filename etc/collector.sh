@@ -6,4 +6,4 @@ fi
 
 HEROKU_OTEL_PATH=$HOME/.heroku-otel
 
-$HEROKU_OTEL_PATH/otelcol --config=$HEROKU_OTEL_PATH/config.yaml
+$HEROKU_OTEL_PATH/otelcol --config=$HEROKU_OTEL_PATH/config.yaml &
