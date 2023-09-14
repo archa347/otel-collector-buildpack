@@ -9,7 +9,7 @@ processors:
 
 exporters:
   logging:
-    verbosity: normal
+    verbosity: detailed
 
 service:
   pipelines:
